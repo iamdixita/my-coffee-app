@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-[#f9f9f9] via-[#f2f2f2] to-[#e9e9e9] shadow-lg sticky top-0 z-50 backdrop-blur-md">
-      <div className="container mx-auto py-2 flex justify-between items-center">
+      <div className="container mx-auto px-2 py-2 flex justify-between items-center">
         {/* Logo + Brand */}
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
@@ -29,9 +29,13 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-4">
             <div className="bg-[#f0eaea] p-1 rounded-full shadow-md hover:shadow-lg transition-shadow duration-300">
               <img
-                src={Logo}
+                       src={Logo}
                 alt="CoffeeShop Logo"
-                className="w-10 h-10 object-contain rounded-full"
+                className="w-18 h-10 object-contain rounded-full"
+                onError={(e) => {
+                 // fallback to public path if import fails
+                 (e.currentTarget as HTMLImageElement).src = "/assets/Logo.png";
+                }}
               />
             </div>
             <span
@@ -44,43 +48,64 @@ const Navbar = () => {
         </motion.div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-4">
-          {user ? (
-            <>
-              <span className="text-[#5a2e2e] font-medium">
-                Hello, {user.username}
-              </span>
-              <Link
-                to="/products"
-                className="!bg-[#f8f5f4] !text-[#4b3b3b] px-2 py-2 rounded-xl font-semibold transition-all duration-300 !hover:bg-[#f4e2e1] !hover:text-[#3a2b2b] hover:shadow-sm"
-              >
-                Products
-              </Link>
+       <div className="hidden md:flex items-center justify-between w-full px-8">
+  {/* Left side — Centered navigation links */}
+  <div className="flex-1 flex justify-center gap-6">
+    <Link
+      to="/"
+      className="!bg-transparent !text-[#5a2e2e] px-3 py-2 rounded-xl font-semibold transition-all duration-300 hover:!bg-gray-100"
+    >
+      Home
+    </Link>
 
-              <button
-                onClick={handleLogout}
-                className="!bg-[#7a7a7a] !text-[#f5f5f5] cursor-pointer px-2 py-2 rounded-xl font-semibold transition-all duration-300 !hover:bg-[#8c8c8c] !hover:text-[#ffffff] !shadow-sm"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="!px-2 !py-2 !rounded-2xl !font-medium !text-amber-900 hover:!bg-gray-200 !transition-all !duration-300"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="!px-4 !py-2 !rounded-2xl !font-medium !text-amber-900 hover:!bg-gray-200 !transition-all !duration-300"
-              >
-                Sign Up
-              </Link>
-            </>
-          )}
-        </div>
+    <Link
+      to="/about"
+      className="!bg-transparent !text-[#5a2e2e] px-3 py-2 rounded-xl font-semibold transition-all duration-300 hover:!bg-gray-100"
+    >
+      About Us
+    </Link>
+
+    {user && (
+      <Link
+        to="/products"
+        className="!bg-transparent !text-[#5a2e2e] px-3 py-2 rounded-xl font-semibold transition-all duration-300 hover:!bg-gray-100"
+      >
+        Products
+      </Link>
+    )}
+  </div>
+
+  {/* Right side — User info or auth buttons */}
+  <div className="flex items-center gap-4">
+    {user ? (
+      <>
+        <span className="text-[#8f5c5c] font-bold">Hello, {user.username}</span>
+        <button
+          onClick={handleLogout}
+          className="!bg-[#e0d5d5] !text-[#562b2b] cursor-pointer px-3 py-2 rounded-xl font-semibold transition-all duration-300 hover:!bg-[#8c8c8c] hover:!text-white !shadow-sm"
+        >
+          Logout
+        </button>
+      </>
+    ) : (
+      <>
+        <Link
+          to="/login"
+          className="!px-3 !py-2 !rounded-2xl !font-medium !text-amber-900 hover:!bg-gray-200 !transition-all !duration-300"
+        >
+          Login
+        </Link>
+        <Link
+          to="/signup"
+          className="!px-4 !py-2 !rounded-2xl !font-medium !text-amber-900 hover:!bg-gray-200 !transition-all !duration-300"
+        >
+          Sign Up
+        </Link>
+      </>
+    )}
+  </div>
+</div>
+
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">

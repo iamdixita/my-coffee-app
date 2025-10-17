@@ -114,7 +114,7 @@ const LandingPage = () => {
               <button
                 className="!bg-white/10 !backdrop-blur-md !text-white !border !border-white !px-10 !py-4 !rounded-full !font-semibold !transition-all !duration-300 !hover:bg-white !hover:text-amber-900 !hover:scale-105 !transform"
               >
-                Sip In ☕
+                Sip In 
               </button>
               <button
                 className="!bg-white !text-amber-900 !px-10 !py-4 !rounded-full !font-semibold !shadow-xl !transition-all !duration-300 !hover:bg-amber-900 !hover:text-white !hover:scale-105 !transform"

@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
 import { useEffect } from "react";
+import AboutPage from "./pages/AboutPage";
 
 // Create a wrapper component so we can use useLocation
 const AppContent = () => {
@@ -26,6 +27,7 @@ const AppContent = () => {
       {!shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route
